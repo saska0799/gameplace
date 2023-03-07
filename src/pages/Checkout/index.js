@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import commerce from "../../lib/commerce";
 import CartContext from "../Cart/cart/context/CartContext";
 import Shipping from "./checkout/components/Shipping";
@@ -41,7 +41,7 @@ const Checkout = () => {
   }, [getToken, cartState]);
 
   return (
-    <div className="w-full flex justify-center my-10">
+    <section className="w-full flex justify-center my-10">
       {!token && <LoadingSpinner />}
       {token && (
         <div className="md:w-[600px] w-full m-auto p-5 md:border-2 border-[#FAEDF0] flex flex-col justify-center">
@@ -86,7 +86,7 @@ const Checkout = () => {
           )}
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

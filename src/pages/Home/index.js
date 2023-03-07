@@ -1,8 +1,8 @@
 import { useContext, useEffect, useCallback, useState } from "react";
+import commerce from "../../lib/commerce";
+import ProductsContext from "./products/context/ProductsContext";
 import CartContext from "../Cart/cart/context/CartContext";
 import ProductsList from "./products/components/ProductsList";
-import ProductsContext from "./products/context/ProductsContext";
-import commerce from "../../lib/commerce";
 import Filter from "../../components/ui/Filter";
 import Button from "../../components/ui/Button";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
@@ -26,7 +26,7 @@ const Home = () => {
   };
   const getCart = useCallback(async () => {
     const cart = await commerce.cart.retrieve();
-    cartDispatch({ type: "SET_CART", payload: cart });
+    cartDispatch({ type: "UPDATE_CART", payload: cart });
   }, [cartDispatch]);
 
   const getCategories = useCallback(async () => {
@@ -51,13 +51,13 @@ const Home = () => {
   }, [getProductsAndCart]);
 
   return (
-    <div className="h-fit flex flex-col justify-center items-center">
+    <section className="h-fit flex flex-col justify-center items-center">
       {productsState &&
         productsState.length === 0 &&
         categories.length === 0 && <LoadingSpinner />}
 
       {categories.length !== 0 && (
-        <div className="sticky flex items-center justify-center flex-wrap lg:top-[12vh] top-[30vh] bg-white w-full h-fit py-4 z-[999] text-center">
+        <div className="sm:sticky flex items-center justify-center flex-wrap lg:top-[12vh] top-[30vh] bg-white w-full h-fit py-4 z-[999] text-center">
           {categories.map((categorie) => (
             <Filter
               filter={filter}
@@ -71,7 +71,7 @@ const Home = () => {
             onClick={() => setSortDirection((prevState) => !prevState)}
             className="mx-24"
           >
-            sort by {sortDirection ? "name" : "price"}
+            sort by {sortDirection ? "price" : "name"}
           </Button>
         </div>
       )}
@@ -81,9 +81,10 @@ const Home = () => {
         <ProductsList
           products={productsState}
           setLimitHandler={setLimitHandler}
+          limit={limit}
         />
       )}
-    </div>
+    </section>
   );
 };
 

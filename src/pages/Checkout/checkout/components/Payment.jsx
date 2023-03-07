@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -5,7 +6,6 @@ import {
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import commerce from "../../../../lib/commerce";
-import { useContext } from "react";
 import CartContext from "../../../Cart/cart/context/CartContext";
 import ShippingContext from "../context/ShippingContext";
 import Button from "../../../../components/ui/Button";
@@ -21,7 +21,7 @@ const Payment = ({ token, timeout, setOrderInfo, goToShipping }) => {
   const refreshCart = async () => {
     const newCart = await commerce.cart.refresh();
 
-    cartDispatch({ type: "SET_CART", payload: newCart });
+    cartDispatch({ type: "UPDATE_CART", payload: newCart });
   };
 
   const captureCheckout = async (token, newOrder) => {

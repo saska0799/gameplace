@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import logo from "../../assets/logo.png";
 import CartContext from "../../pages/Cart/cart/context/CartContext";
 import Search from "../ui/Search";
@@ -9,7 +9,7 @@ const Header = () => {
   const { cartState } = useContext(CartContext);
 
   return (
-    <header className="lg:h-[12vh] h-[30vh] px-10 bg-[#161853] flex flex-wrap lg:flex-nowrap justify-between items-center z-[999] sticky top-0">
+    <header className="lg:h-[12vh] h-[30vh] px-10 bg-[#161853] flex flex-wrap lg:flex-nowrap justify-between items-center z-[999] sm:sticky top-0">
       <Link
         to="/"
         className="text-4xl lg:text-6xl text-white flex items-center order-1"

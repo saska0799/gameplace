@@ -4,9 +4,9 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import RootLayout from "./components/layout/RootLayout";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-import RootLayout from "./components/layout/RootLayout";
 import Checkout from "./pages/Checkout";
 
 const App = () => {

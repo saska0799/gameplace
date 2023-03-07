@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import ShippingContext from "../context/ShippingContext";
 import { Link } from "react-router-dom";
+import ShippingContext from "../context/ShippingContext";
 import Button from "../../../../components/ui/Button";
 
 const Shipping = ({ goToPayment }) => {

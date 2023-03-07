@@ -1,23 +1,24 @@
 import { useContext } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
-import CartContext from "../context/CartContext";
 import commerce from "../../../../lib/commerce";
+import CartContext from "../context/CartContext";
+import CartItemCard from "./CartItemCard";
 
 const CartListItem = ({ item }) => {
   const { cartDispatch } = useContext(CartContext);
 
   const removeFromCart = async (lineItemId) => {
     const response = await commerce.cart.remove(lineItemId);
-    cartDispatch({ type: "REMOVE_FROM_CART", payload: response });
+    cartDispatch({ type: "UPDATE_CART", payload: response });
   };
 
   const updateItemQuantity = async (lineItemId, quantity) => {
     const response = await commerce.cart.update(lineItemId, { quantity });
-    cartDispatch({ type: "SET_CART", payload: response });
+    cartDispatch({ type: "UPDATE_CART", payload: response });
   };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-center h-fit w-full bg-[#FAEDF0] my-10 p-5 text-2xl hover:scale-105 shadow-md shadow-[#161853] hover:shadow-lg hover:shadow-[#161853] transition-all rounded-lg ">
+    <CartItemCard>
       <div className="flex items-center sm:h-[90%] h-[70%]">
         <img
           src={item.image.url}
@@ -48,7 +49,7 @@ const CartListItem = ({ item }) => {
           onClick={() => removeFromCart(item.id)}
         />
       </div>
-    </div>
+    </CartItemCard>
   );
 };
 

@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useCallback } from "react";
-import CartList from "./cart/components/CartList";
-import CartContext from "./cart/context/CartContext";
-import commerce from "../../lib/commerce";
+import { useContext, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import commerce from "../../lib/commerce";
+import CartContext from "./cart/context/CartContext";
+import CartList from "./cart/components/CartList";
 import Button from "../../components/ui/Button";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
@@ -11,12 +11,12 @@ const Cart = () => {
 
   const emptyCart = async () => {
     const response = await commerce.cart.empty();
-    cartDispatch({ type: "EMPTY_CART", payload: response });
+    cartDispatch({ type: "UPDATE_CART", payload: response });
   };
 
   const getCart = useCallback(async () => {
     const cart = await commerce.cart.retrieve();
-    cartDispatch({ type: "SET_CART", payload: cart });
+    cartDispatch({ type: "UPDATE_CART", payload: cart });
   }, [cartDispatch]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Cart = () => {
   }, [getCart]);
 
   return (
-    <div className="2xl:w-[60%] xl:w-[70%] lg:w-[85%] md:w-full mx-auto my-10">
+    <section className="2xl:w-[60%] xl:w-[70%] lg:w-[85%] md:w-full mx-auto my-10">
       {cartState && cartState.total_items === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -67,7 +67,7 @@ const Cart = () => {
           )}
         </>
       )}
-    </div>
+    </section>
   );
 };
 
